@@ -21,7 +21,7 @@ dbfile = File.expand_path("../config/database.yml", __FILE__)
 
 group :production do
   # gem 'pg'
-  gem 'pg', '~> 0.18'
+  gem 'pg', '~> 0.11'
 end
 
 source 'https://rubygems.org'
