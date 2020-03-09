@@ -27,6 +27,8 @@ end
 source 'https://rubygems.org'
 ruby "1.9.3"
 
+gem 'pg', '~> 0.9.0'
+
 gem 'thin'
 gem 'rails', '~> 3.0.10'
 gem 'require_relative'
@@ -53,7 +55,8 @@ group :development, :test do
   gem 'webrat'
   gem 'rspec-rails', '~> 2.0'
   gem 'simplecov', :require => false
-  gem 'sqlite3'
+  # gem 'sqlite3'
+  gem 'pg', '~> 0.9.0'
   gem 'cucumber'
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
