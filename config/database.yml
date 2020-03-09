@@ -1,19 +1,23 @@
-development:
+default: &default
   adapter: postgresql
-  database: db_development
-  timeout: 5000
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-test: &test
-  adapter: postgresql
-  database: db_test
-  timeout: 5000
+development:
+  <<: *default
+  database: myapp_development
+
+test:
+  <<: *default
+  database: myapp_test
 
 production:
-  adapter: postgresql
-  database: db_production
-  timeout: 5000
-
-
+  <<: *default
+  database: myapp_production
+  username: myapp
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
 
 
 cucumber:
