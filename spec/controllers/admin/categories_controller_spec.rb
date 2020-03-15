@@ -15,7 +15,26 @@ describe Admin::CategoriesController do
     get :index
     assert_response :redirect, :action => 'index'
   end
-
+  
+  describe "test_categories" do
+    before(:each) do
+      get :new
+    end
+    
+    it 'should render template new' do
+      assert_template 'new'
+      assert_tag :tag => "table",
+        :attributes => { :id => "category_container" }
+    end
+    
+    it 'should support new category' do
+      post :new, :category  => {:name => "new category name", :keywords => "new category keywords", :permalink => "new category permalink", :description => "new category description"}
+      assert_response :redirect, :action => 'index'
+      assigns(:category).name == "new category name"
+    end
+    
+  end
+  
   describe "test_edit" do
     before(:each) do
       get :edit, :id => Factory(:category).id
@@ -31,6 +50,13 @@ describe Admin::CategoriesController do
       assigns(:category).should_not be_nil
       assert assigns(:category).valid?
       assigns(:categories).should_not be_nil
+    end
+    
+    it "shoud edit category" do
+      post:edit, :category => {:name => "General", :keywords => "kw", :permalink => "n.a.", :description => "General Description"}
+      assert_response :redirect, :action=> "index"
+      assigns(:category).should_not be_nil
+      assigns(:category).description == "General Description"
     end
   end
 
