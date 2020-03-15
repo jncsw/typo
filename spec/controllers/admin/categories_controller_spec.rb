@@ -30,7 +30,7 @@ describe Admin::CategoriesController do
     it 'should support new category' do
       post :new, :category  => {:name => "new category name", :keywords => "new category keywords", :permalink => "new category permalink", :description => "new category description"}
       assert_response :redirect, :action => 'index'
-      assigns(:category).name == "new category name"
+      assigns(:category).name.should == "new category name"
     end
     
   end
@@ -56,7 +56,7 @@ describe Admin::CategoriesController do
       post:edit, :category => {:name => "General", :keywords => "kw", :permalink => "n.a.", :description => "General Description"}
       assert_response :redirect, :action=> "index"
       assigns(:category).should_not be_nil
-      assigns(:category).description == "General Description"
+      assigns(:category).description.should == "General Description"
     end
   end
 
